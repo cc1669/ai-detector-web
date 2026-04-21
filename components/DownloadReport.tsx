@@ -47,7 +47,7 @@ export default function DownloadReport({ result, originalText }: DownloadReportP
       doc.text('AI Probability Analysis', 20, 58);
 
       const probColor = result.isAI ? [220, 53, 69] : [40, 167, 69];
-      doc.setFillColor(...probColor);
+      doc.setFillColor(probColor[0], probColor[1], probColor[2]);
       doc.roundedRect(20, 65, 170, 25, 3, 3, 'F');
 
       doc.setFontSize(14);
@@ -83,7 +83,7 @@ export default function DownloadReport({ result, originalText }: DownloadReportP
 
         // Bar fill
         const barColor = model.value > 50 ? [220, 53, 69] : [40, 167, 69];
-        doc.setFillColor(...barColor);
+        doc.setFillColor(barColor[0], barColor[1], barColor[2]);
         doc.roundedRect(50, yPos - 4, model.value * 1.2, 8, 1, 1, 'F');
 
         doc.setTextColor(0);
@@ -115,7 +115,7 @@ export default function DownloadReport({ result, originalText }: DownloadReportP
 
         doc.setFontSize(8);
         doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...labelColor);
+        doc.setTextColor(labelColor[0], labelColor[1], labelColor[2]);
         doc.text(`${label} (${sentence.probability}%)`, 20, yPos);
 
         doc.setFont('helvetica', 'normal');

@@ -55,7 +55,7 @@ function addProbabilitySection(doc: jsPDF, result: DetectionResult): void {
 
   // Overall probability box
   const probColor = result.isAI ? [220, 53, 69] : [40, 167, 69]; // Red for AI, Green for Human
-  doc.setFillColor(...probColor);
+  doc.setFillColor(probColor[0], probColor[1], probColor[2]);
   doc.roundedRect(20, yPos, 170, 30, 3, 3, 'F');
 
   doc.setFontSize(14);
@@ -85,11 +85,8 @@ function addProbabilitySection(doc: jsPDF, result: DetectionResult): void {
 /**
  * Add model analysis section
  */
-function addModelSection(doc: jsPDF, result: DetectionResult): void {
-  let yPos = doc.getLastBreakPoint() || 130;
-
-  // Ensure we have enough space
-  if (yPos < 130) yPos = 130;
+function addModelSection(doc: jsPDF, result: DetectionResult): number {
+  let yPos = 130;
 
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
@@ -117,7 +114,7 @@ function addModelSection(doc: jsPDF, result: DetectionResult): void {
 
     // Bar fill
     const barColor = model.value > 50 ? [220, 53, 69] : [40, 167, 69];
-    doc.setFillColor(...barColor);
+    doc.setFillColor(barColor[0], barColor[1], barColor[2]);
     doc.roundedRect(50, barY + 2, model.value * 1.2, 8, 1, 1, 'F');
 
     // Percentage
@@ -159,7 +156,7 @@ function addTextSection(doc: jsPDF, sentences: Sentence[]): void {
     // Label
     doc.setFontSize(8);
     doc.setFont('helvetica', 'bold');
-    doc.setTextColor(...labelColor);
+    doc.setTextColor(labelColor[0], labelColor[1], labelColor[2]);
     doc.text(`${label} (${sentence.probability}%)`, 20, yPos);
 
     // Sentence text
